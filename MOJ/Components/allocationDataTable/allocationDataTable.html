@@ -1,0 +1,50 @@
+<div>
+    <p class="intro-text">Use the table below to allocate staff to young people.</p>
+
+    <div class="row"> 
+        <div class="col-xs-2">
+            <input type="radio" ng-change="ctrl.displayDataChanged()" ng-model="ctrl.displayData" value="{{ctrl.AllocationSelection.All}}"/> All
+        </div>
+        <div class="col-xs-2">
+            <input type="radio" ng-change="ctrl.displayDataChanged()" ng-model="ctrl.displayData" value="{{ctrl.AllocationSelection.Allocated}}"/> Allocated
+        </div>
+        <div class="col-xs-2">
+            <input type="radio" ng-change="ctrl.displayDataChanged()" ng-model="ctrl.displayData" value="{{ctrl.AllocationSelection.AwaitingAllocation}}"/> Waiting allocation
+        </div>
+         <div class="col-xs-8"></div>
+    </div>
+
+    <div class="yjb-table yjb-table-striped">
+        <table ng-table="ctrl.tableParams" class="table" show-filter="true">
+            <tr ng-repeat="youngPerson in $data | filter:ctrl.filterAllocated track by $index" class="record-entry hoverable">
+                <td title="'First Name'" filter="{ firstName: 'text'}" sortable="'firstName'">
+                    {{youngPerson.firstName}}
+                </td>
+                <td title="'Last Name'" filter="{ lastName: 'text'}" sortable="'lastName'">
+                    {{youngPerson.lastName}}
+                </td>
+                <td title="'Date of Birth'" filter="{ dob: 'text'}" sortable="'dob'">
+                    {{youngPerson.dob | formatDate}}
+                </td>
+                <td title="'Establishment'" filter="{ yotIdRef: 'text'}" sortable="'yotIdRef'">
+                    {{youngPerson.yotIdRef}}
+                </td>
+                <td title="'Workflow status'" filter="{ workflowStatus: 'text'}" sortable="'workflowStatus'">
+                   {{youngPerson.workflowStatus}}
+                </td>
+                <td title="'Release date'" filter="{ }" sortable="'plannedReleaseDate'">
+                   {{youngPerson.plannedReleaseDate}}
+                </td>
+                <td title="'Allocated to'" filter="{ _allocatedTo: 'select' }" filter-data="ctrl.staffOptions()" sortable="'_allocatedTo'">
+                    {{youngPerson._allocatedTo}}
+                </td>
+                <td title="Edit">
+                    <md-button class="md-icon-button" ng-click="ctrl.editAllocation($event, youngPerson)">
+                        <md-icon>create</md-icon>
+                    </md-button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>

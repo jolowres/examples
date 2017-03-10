@@ -1,0 +1,25 @@
+#eligibility-form, #eligibility-questions-form{
+
+	.section{
+		@include respond-to(fixed-width) {
+	      	width: 420px;
+	    }
+		@include respond-to(mid-screen) {
+		    width: calc(50vw - 80px);
+		}
+	}
+	.btn-active{
+		margin-top:size(spacing, small);
+		width:100%;
+	}
+	.action-buttons{
+		.btn{
+			@include respond-to(fixed-width) {
+	      		width: 21%;
+	    	}
+		    @include respond-to(mid-screen) {
+		      	width: 21%;
+		    }
+		}
+	}
+}

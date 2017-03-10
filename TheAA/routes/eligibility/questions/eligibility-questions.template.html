@@ -1,0 +1,48 @@
+<!-- Eligibility Questions Section -->
+<form id="eligibility-questions-form">
+    <div class="section">
+        <div class="section-header-non-validation clear">
+            <div class="col-xs-12">
+                <h2 class="title">{{ctrl.customerGroupName()}} non-validation</h2>
+            </div>
+        </div>
+        <div class="section-body-questions-answers">
+
+            <fieldset class="answers">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div ng-repeat="qa in ctrl.answeredQuestions() track by $index">
+                            <p class="question"><span>Q - </span>{{qa.questionText()}}</p>
+                            <p class="answer"><span>A - </span>{{qa.selectedAnswer().answerText()}}</p>
+                        </div>
+                    </div>
+            </fieldset>
+
+            <fieldset class="questions" ng-hide="ctrl.showOutcome()">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <formly-form model="ctrl.model" fields="ctrl.eligibilityQuestionFieldDefinition()">
+                    </formly-form>
+                </div>
+            </fieldset>
+            
+            <fieldset class="message" ng-show="ctrl.showOutcome()">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p>{{ctrl.outcome()}}
+                        <span ng-if="ctrl.outcomeInfoUrl()">Refer to: <a href="{{ctrl.outcomeInfoUrl()}}" target="_blank">{{ctrl.outcomeInfoUrl()}}</a></span>
+                    </p>
+                </div>
+            </fieldset>
+        </div> 
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <fieldset class="action-buttons">
+        
+            <span class="risk-code"  ng-show="ctrl.eligible() && ctrl.riskCode()">Risk code: {{ctrl.riskCode()}}</span>
+            <span class="risk-code"  ng-show="ctrl.eligible() && ctrl.accountNo()">Account no: {{ctrl.accountNo()}}</span>
+            <span class="risk-code"  ng-show="ctrl.eligible() && ctrl.bcaspNo()">BCASP no: {{ctrl.bcaspNo()}}</span>
+            <button class="btn btn-primary-action" ng-disabled="!ctrl.showOutcome()" ng-click="ctrl.continueClick()">Continue</button>
+            <button class="btn btn-secondary-action" ng-disabled="ctrl.disableBackButton()" ng-click="ctrl.backClick()">Back</button>
+            <button class="btn btn-secondary-action" ng-click="ctrl.cancelClick()">Cancel</button>
+        
+    </fieldset>
+    </div>
+</form>

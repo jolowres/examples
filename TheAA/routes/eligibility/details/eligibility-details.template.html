@@ -1,0 +1,211 @@
+<!-- Eligibility Details Section -->
+<form name="eligibilityDetailsForm" id="eligibility-form" ng-init="ctrl.init()">
+    <div class="section">
+        <div class="section-header-eligibility-details clear">
+            <div class="col-sm-10 col-xs-10">
+                <h2 class="title">Eligibility details</h2>
+            </div>
+        </div>
+        <div class="section-body-eligibility-details">
+
+            <fieldset>
+                <div ng-if="!ctrl.isFleetCustomerGroup()">
+                    <div class="col-sm-2 col-xs-2">
+                        <label  class="label-primary"
+                                for="title">Title</label>
+                        <dg-validation position="bottom" model="eligibilityDetailsForm.title">
+                            <input  name="title"
+                                    dg-validation-trigger
+                                    id="title"
+                                    name="title"
+                                    class="form-field form-control" 
+                                    ng-model="ctrl.eligibilityDetails().title" 
+                                    ng-model-options="ctrl.modelOptions" 
+                                    required/>
+                        </dg-validation>
+                    </div>
+                </div>
+                <div ng-if="!ctrl.isFleetCustomerGroup()">
+                    <div class="col-sm-4 col-xs-4">
+                        <label  class="label-primary"
+                                for="forename">Forename/Initial</label>
+                        <dg-validation position="bottom" model="eligibilityDetailsForm.forename">
+                            <input  name="forename"
+                                    dg-validation-trigger
+                                    id="forename"
+                                    name="forename"
+                                    class="form-field form-control" 
+                                    ng-model="ctrl.eligibilityDetails().forename" 
+                                    ng-model-options="ctrl.modelOptions"
+                                    required/>
+                        </dg-validation>
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <label  class="label-primary"
+                                for="surname">Surname</label>
+                        <dg-validation position="bottom" model="eligibilityDetailsForm.surname">
+                            <input  name="surname"
+                                    dg-validation-trigger
+                                    id="surname"
+                                    name="surname"
+                                    class="form-field form-control" 
+                                    ng-model="ctrl.eligibilityDetails().surname" 
+                                    ng-model-options="ctrl.modelOptions" 
+                                    required/>
+                        </dg-validation>
+                    </div>
+                </div>
+                <div ng-if="ctrl.isFleetCustomerGroup()">
+                    <div class="col-sm-6 col-xs-6">
+                        <label  class="label-primary"
+                                for="company">Company</label>
+                        <input  class="form-field form-control"
+                                name="company"
+                                id="company"
+                                ng-model="ctrl.eligibilityDetails().company" 
+                                ng-model-options="ctrl.modelOptions"/>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="!ctrl.isWillJoin()">
+                <div class="col-sm-6 col-xs-6">
+                    <label  class="label-primary"
+                            for="membershipNumber">Membership number</label>
+                    <input  name="membershipNumber"
+                            id="membershipNumber"
+                            class="form-field form-control" 
+                            ng-model="ctrl.eligibilityDetails().membershipNumber" 
+                            ng-model-options="ctrl.modelOptions" />
+                </div>
+                <div class="col-sm-6 col-xs-6" ng-if="ctrl.isPersonalCustomerGroup()">
+                    <label  class="label-primary"
+                            for="role">Role</label>
+                    <div class="select-wrap">
+                        <select class="form-select form-control" 
+                                name="role"
+                                id="role"
+                                ng-options="option for option in ctrl.roles()"
+                                ng-model="ctrl.eligibilityDetails().role"
+                                ng-model-options="ctrl.modelOptions"
+                                required></select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="!ctrl.isWillJoin()">
+                <div class="col-sm-6 col-xs-6" ng-if="ctrl.isFleetCustomerGroup()">
+                    <label  class="label-primary" 
+                            for="card-number">Card number</label>
+                    <input  name="card-number"
+                            id="card-number"
+                            class="form-field form-control" 
+                            ng-model="ctrl.eligibilityDetails().cardNumber" 
+                            ng-model-options="ctrl.modelOptions"/>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="!ctrl.isWillJoin()">   
+                <div class="col-sm-6 col-xs-6">
+                    <label  class="label-primary"
+                            for="registration-number">Registration number</label>
+                    <input  name="registration-number"
+                            id="registration-number"
+                            class="form-field form-control" 
+                            ng-model="ctrl.eligibilityDetails().registrationNumber" 
+                            ng-blur="ctrl.getVehileDetails()" 
+                            ng-model-options="{getterSetter:true}"/>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                    <label  class="label-primary"
+                            for="vehicle-details">Vehicle details</label>
+                    <input  name="vehicle-details"
+                            id="vehicle-details"
+                            class="form-field form-control" 
+                            value="{{ctrl.vehicleDetails()}}"
+                            readonly/>
+                </div>
+            </fieldset>
+
+            <fieldset ng-show="!ctrl.isWillJoin()">
+                    <div class="col-sm-12 col-xs-12">
+                    <label  class="label-primary"
+                            for="remark">Remark</label>
+                    <input  name="remark"
+                            id="remark"
+                            class="form-field form-control" 
+                            ng-model="ctrl.eligibilityDetails().remark" 
+                            ng-model-options="ctrl.modelOptions"/>
+                    </div>
+            </fieldset>
+
+        </div><!-- END section-body-eligibility-details -->
+    </div>
+    <div class="section">   
+        <div class="section-body-eligibility-details section-eligibility">
+            <div class="section-header-eligibility-details clear" ng-show="!ctrl.isWillJoin()">
+                <div class="col-sm-10 col-xs-10">
+                    <h2 class="title">Address details</h2>
+                </div>
+            </div>
+
+            <fieldset ng-show="!ctrl.isWillJoin()">
+                <aah-address-lookup address-model="ctrl.eligibilityDetails().address"></aah-address-lookup>
+                <div class="col-sm-6 col-xs-6">
+                    <label  for="address" class="label-primary">Address</label>
+                    <input  name="addressLine1"
+                            id="address" 
+                            class="form-field form-control" 
+                            ng-model="ctrl.eligibilityDetails().address().addressLines()[0]" 
+                            ng-model-options="ctrl.modelOptions"
+                            required/>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                    <label  for="address2" class="label-primary">Address line 2</label>
+                    <input  class="form-field form-control"
+                            id="address2"
+                            name="addressLine2" 
+                            ng-model="ctrl.eligibilityDetails().address().addressLines()[1]" 
+                            ng-model-options="ctrl.modelOptions"/>
+                </div>
+            </fieldset ng-show="!ctrl.isWillJoin()">
+
+            <fieldset ng-show="!ctrl.isWillJoin()">
+                <div class="col-sm-6 col-xs-6">
+                    <label  class="label-primary"
+                            for="town">Town</label>
+                    <input  name="town"
+                            id="town"
+                            class="form-field form-control" 
+                            ng-model="ctrl.eligibilityDetails().address().addressLines()[2]" 
+                            ng-model-options="ctrl.modelOptions"/>
+                </div>
+                <div class="col-sm-6 col-xs-6">
+                    <label  class="label-primary"
+                            for="county">County</label>
+                    <input  name="county"
+                            id="county"
+                            class="form-field form-control" 
+                            ng-model="ctrl.eligibilityDetails().address().addressLines()[3]" 
+                            ng-model-options="ctrl.modelOptions"/>
+                </div>
+            </fieldset>
+            <fieldset ng-show="!ctrl.isWillJoin()">
+                <div class="col-sm-2 col-xs-2">
+                    <label  class="label-primary"
+                            for="postcode">Postcode</label>
+                    <input  name="postcode"
+                            id="postcode"
+                            class="form-field form-control" 
+                            ng-model="ctrl.eligibilityDetails().address().postcode" 
+                            ng-model-options="ctrl.modelOptions" 
+                            ng-required="!ctrl.isWillJoin()"/>
+                </div>
+            </fieldset>
+        </div><!-- END section-body-eligibility-details -->
+    </div>
+    <div class="action-buttons">
+        <button class="btn btn-primary-action" ng-click="ctrl.saveEligibility()">Ok</button>
+        <button class="btn btn-secondary-action" ng-click="ctrl.cancelClick()">Cancel</button>
+    </div>
+</form>

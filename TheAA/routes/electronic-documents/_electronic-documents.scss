@@ -1,0 +1,21 @@
+#electronic-documents{
+
+  .electronic-documents-container{
+    height:225px;
+    overflow-y: auto;
+  }
+
+  .electronic-documents {
+    width: auto;
+  }
+
+  .electronic-documents-table {
+    padding: 8px;
+  }
+
+  .electronic-documents-table:hover {
+    background-color: red !important;
+    cursor: pointer;
+  }
+
+}

@@ -1,0 +1,83 @@
+#eligibility-questions-form {
+  height: inherit;
+
+  @include respond-to(laptops) {
+    .section{
+      margin-bottom: size(spacing, mid-small);
+    }
+  }
+
+  .section-header-non-validation{
+    margin-bottom: -5px;
+  }
+
+  .flexible-fields{
+    margin-right: 0;
+  }
+
+  .action-buttons{
+    margin-left: 0;
+  }
+
+  .title{
+    margin-bottom:size(spacing, mid-small);
+  }
+
+  .questions{
+    overflow-y: auto;
+
+    label, p{
+      font-weight:bold;
+    }
+
+    .radio-group {
+      border: 1px solid;
+      @include btn-mixed($radio-group-eligibility...);
+      max-height: 400px;
+      overflow-y: auto;
+
+      input {
+        display: none;
+      }
+
+      label {
+        display: block;
+        padding: size(spacing, xx-small) size(spacing, x-small);
+        width: 100%;
+        @include btn-mixed($label-eligibility...);
+      }
+
+      .radio, .checkbox {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+    }
+  }
+
+  .answers{
+
+    .question, .answer{
+      padding: size(spacing, xx-small) size(spacing, x-small) 0 size(spacing, x-small);
+      width: 100%;
+      margin:0;
+    }
+
+    .question {
+      @include elements($eligibilty-question...);
+    }
+
+    .answer {
+      margin-bottom: size(spacing, mid-small);
+    }
+  }
+
+  .message p  {
+    font-weight: bold;
+  }
+
+  .risk-code{
+    @include btn-mixed($eligibility-risk-code...);
+    float: left;
+    padding:size(spacing, x-small);
+  }
+}

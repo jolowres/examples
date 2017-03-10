@@ -1,0 +1,9 @@
+<div id="electronic-documents" class="main-panel shadow general-scrollbar">
+
+    <h1> Documents </h1>
+
+    <div ng-repeat="document in ctrl.electronicDocuments() track by $index" class="electronic-documents-table">
+        <div ng-click="ctrl.getDocument(document.documentId())">{{::document.documentId()}} {{::document.documentTypeId()}}</div>
+    </div>
+
+</div>
